@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Sandbox</title>
+</head>
+<body>
+    
+    <button id="getText">Get Text</button>
+    <div id="output"></div>
+    <button id="getParkCode">Get Park Code!</button>
+
+    <script>
+        const NPS = 'https://developer.nps.gov/api/v1/parks?description&api_key=p1Dd8FX7wziDWMwSzFheP5ZEyngSF3Azh144Goz3'
+
+        document.getElementById('getText').addEventListener('click', getText);
+        document.getElementById('getParkCode').addEventListener('click', getParkCode);
+
+        function getText(){
+            fetch(NPS)
+            .then(function(res){
+              return res.text();
+            })
+            .then(function(data){
+               console.log(data); 
+               let output = '<h2>this is here<h/2>'
+            });
+        }
+
+        function getParkCode(){
+            let parks = 'https://developer.nps.gov/api/v1/parks?description&api_key=p1Dd8FX7wziDWMwSzFheP5ZEyngSF3Azh144Goz3'
+            fetch(parks)
+            console.log(parks)
+            .then((res) => res.text())
+            .then((data) => {
+                let output = '<h2>Park Codes</h2>';
+                    output += `
+                     <ul>
+                        <li>ID: ${parks.id}</li>
+                        <li>Name: ${parks.fullName}</li>
+                        <li>URL: ${parks.url}</li>
+                        
+                     </ul>   
+                    `;
+                document.getElementById('output').innerHTML = output;
+            })
+        }
+    </script>
+</body>
+</html>
